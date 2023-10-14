@@ -1,4 +1,4 @@
-import 'package:basic_dart/basic_dart.dart';
+import 'package:basic_dart/simple_calculation.dart';
 import 'package:test/test.dart';
 
 void main() {
