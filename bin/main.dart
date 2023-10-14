@@ -631,17 +631,40 @@ void main() {
     27/06/2024 - AM
   """;
 
-  // Use regular expressions to extract course codes
+  // Use regular expressions to extract all course codes
   RegExp courseCodePattern = RegExp(r'(BCI|BCU)\d{4}');
-  Iterable<Match> matches = courseCodePattern.allMatches(text);
+  Iterable<Match> courseCodeMatches = courseCodePattern.allMatches(text);
 
-  // Extract and display the course codes
-  for (Match match in matches) {
-    String? courseCode = match.group(0);
+  // Use a Set to store unique course codes
+  Set<String> uniqueCourseCodes = Set();
 
-    // Check if the course code is not in the prerequisites
-    if (!text.contains("Pre-Requisite :$courseCode")) {
-      print(courseCode);
+  // Extract and store the unique course codes
+  for (Match match in courseCodeMatches) {
+    uniqueCourseCodes.add(match.group(0)!);
+  }
+
+  // Extract prerequisites section
+  RegExp prerequisitePattern = RegExp(r'Pre-Requisite :([^:]+)?');
+  Iterable<Match> prerequisiteMatches = prerequisitePattern.allMatches(text);
+
+  // Extract and store unique prerequisite course codes
+  Set<String> uniquePrerequisiteCourseCodes = Set();
+
+  for (Match match in prerequisiteMatches) {
+    String? prerequisiteText = match.group(1);
+    if (prerequisiteText != null) {
+      uniquePrerequisiteCourseCodes.addAll(courseCodePattern
+          .allMatches(prerequisiteText)
+          .map((m) => m.group(0)!));
     }
+  }
+
+  // Calculate the non-prerequisite course codes
+  Set<String> nonPrerequisiteCourseCodes =
+      uniqueCourseCodes.difference(uniquePrerequisiteCourseCodes);
+
+  // Display the non-prerequisite course codes
+  for (String courseCode in nonPrerequisiteCourseCodes) {
+    print(courseCode);
   }
 }
