@@ -636,7 +636,7 @@ void main() {
   Iterable<Match> courseCodeMatches = courseCodePattern.allMatches(text);
 
   // Use a Set to store unique course codes
-  Set<String> uniqueCourseCodes = Set();
+  Set<String> uniqueCourseCodes = {};
 
   // Extract and store the unique course codes
   for (Match match in courseCodeMatches) {
@@ -648,7 +648,7 @@ void main() {
   Iterable<Match> prerequisiteMatches = prerequisitePattern.allMatches(text);
 
   // Extract and store unique prerequisite course codes
-  Set<String> uniquePrerequisiteCourseCodes = Set();
+  Set<String> uniquePrerequisiteCourseCodes = {};
 
   for (Match match in prerequisiteMatches) {
     String? prerequisiteText = match.group(1);
