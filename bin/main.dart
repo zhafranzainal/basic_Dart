@@ -1,5 +1,3 @@
-import 'package:basic_dart/course_parser.dart';
-
 void main() {
   // Input text
   String text = """
@@ -76,6 +74,12 @@ void main() {
     30/01/2024 - AM25/01/2024 - AM25/01/2024 - AM
   """;
 
-  String courseCodes = extractCourseCodes(text);
-  print("Extracted Course Codes: $courseCodes");
+  // Use regular expressions to extract course codes
+  RegExp courseCodePattern = RegExp(r'BCI\d{4}');
+  Iterable<Match> matches = courseCodePattern.allMatches(text);
+
+  // Extract and display the course codes
+  for (Match match in matches) {
+    print(match.group(0));
+  }
 }
