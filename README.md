@@ -1,2 +1,3 @@
 # basic_Dart
-Topics covered include decision, looping, array and function.
+A sample command-line application with an entrypoint in `bin/`, library code
+in `lib/`, and example unit test in `test/`.
