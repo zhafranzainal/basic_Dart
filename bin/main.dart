@@ -632,7 +632,7 @@ void main() {
   """;
 
   // Use regular expressions to extract course codes
-  RegExp courseCodePattern = RegExp(r'BCI\d{4}');
+  RegExp courseCodePattern = RegExp(r'(BCI|BCU)\d{4}');
   Iterable<Match> matches = courseCodePattern.allMatches(text);
 
   // Extract and display the course codes
